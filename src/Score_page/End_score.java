@@ -123,7 +123,7 @@ public class End_score extends JFrame implements ActionListener{
              this.dispose();
              System.exit(0);  
          }else{
-             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??��?��?��??
          }            
      }
      

@@ -21,6 +21,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import audio.MP3;
+
+
  
 public class Start extends JFrame implements ActionListener{
      
@@ -33,6 +37,12 @@ public class Start extends JFrame implements ActionListener{
     Start() {    
         this.setTitle("Start_page");
         this.setLayout(null);
+        
+        //MUSIC
+        String filename = "resources/audio/game_music.mp3";
+        MP3 mp3 = new MP3(filename);
+        mp3.setLoop(true);
+        mp3.play();
         
         //Start,Exit,Score按鈕新增
         JButton Start = new JButton();
@@ -94,6 +104,7 @@ public class Start extends JFrame implements ActionListener{
         Exit.addActionListener(new ActionListener(){ 
 		public void actionPerformed(ActionEvent e){ 
 			windowClosing(null);//關掉視窗
+			
 			} 
 		}); //監聽
         
@@ -123,7 +134,7 @@ public class Start extends JFrame implements ActionListener{
              this.dispose();
              System.exit(0);  
          }else{
-             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??��?��?��??
          }            
      }
      

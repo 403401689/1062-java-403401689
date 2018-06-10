@@ -95,6 +95,7 @@ public class BestScore_list {
             Back.setContentAreaFilled(false);
             Back.addActionListener(new ActionListener(){ 
         		public void actionPerformed(ActionEvent e){ 
+        			
         			Back_start();//進入Start_page
         			} 
         		}); //監聽
@@ -183,7 +184,7 @@ public class BestScore_list {
         	frame.dispose();
             System.exit(0);  
         }else{
-        	frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        	frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??��?��?��??
         }            
     }  
   
