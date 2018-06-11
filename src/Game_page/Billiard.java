@@ -1,5 +1,4 @@
 package Game_page;
-
 import java.awt.Graphics;
 import java.awt.Color;
 
@@ -10,6 +9,8 @@ public class Billiard
     private double x,   y;
     public double Vx, Vy;
     private double radius;
+    private String number;
+    private Color color;
 
     public double getSpeed(){
         return Vx*Vx + Vy*Vy;
@@ -19,20 +20,28 @@ public class Billiard
     public double getX(){ return x;}
     public double getY(){ return y;}
 
-    public Billiard(double x, double y)
+    public Billiard(double x, double y,String number,Color color)
     {
       radius = 10;
       this.x = x;
       this.y = y;
       Vx = 0;
       Vy = 0;
+      this.number = number;
+      this.color = color;
     }
 
     public void paint(Graphics g)
     {
-       g.setColor(Color.black);
+       
+       g.setColor(color);
        int diameter = (int)(radius*2);
        g.fillOval((int)x,(int)y,diameter,diameter);
+       g.setColor(Color.white);
+       g.fillOval((int)x+4,(int)y+4,diameter-8,diameter-8);
+       g.setColor(Color.BLACK);
+       g.drawString(number,(int)x+5,(int)y+14);
+
     }
 
 
@@ -82,6 +91,7 @@ public class Billiard
             Vy -= dy*scale;
             other.Vx += dx*scale;
             other.Vy += dy*scale;
+            
         }
     }
 }

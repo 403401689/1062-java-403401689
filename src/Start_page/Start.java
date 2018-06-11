@@ -44,7 +44,7 @@ public class Start extends JFrame implements ActionListener{
         mp3.setLoop(true);
         mp3.play();
         
-        //Start,Exit,Score按鈕新增
+        //Start,Exit,Score���憓�
         JButton Start = new JButton();
         this.add(Start);
         JButton Exit = new JButton();
@@ -52,12 +52,12 @@ public class Start extends JFrame implements ActionListener{
         JButton Score = new JButton();
         this.add(Score);
         
-        //Start,Exit,Score按鈕圖案
+        //Start,Exit,Score������
         ImageIcon start_icon = new ImageIcon(Start.class.getClassLoader().getResource("start_icon.png"));
         ImageIcon exit_icon = new ImageIcon(Start.class.getClassLoader().getResource("exit_icon.png"));
         ImageIcon score_icon = new ImageIcon(Start.class.getClassLoader().getResource("score_icon.png"));
          
-        //背景
+        //��
         ImageIcon background = new ImageIcon(Start.class.getClassLoader().getResource("Start_background.jpg"));
         JLabel bkLabel = new JLabel(background);
         bkLabel.setBounds(0, 0,background.getIconWidth(), background.getIconHeight());
@@ -68,7 +68,7 @@ public class Start extends JFrame implements ActionListener{
         
         //PLAYER NAME JLABEL
         JLabel label1=new JLabel("PLAYER NAME : ");
-        label1.setFont(new Font("標楷體?", 1, 40));
+        label1.setFont(new Font("璅扑擃�?", 1, 40));
         label1.setForeground(Color.getHSBColor(178, 34, 34));
         label1.setBounds(50,50,350,80);
         //label1.setIcon(exit_icon);
@@ -77,46 +77,46 @@ public class Start extends JFrame implements ActionListener{
         //PLAYER NAME JTextField
         JTextField NameInput = new JTextField();
         NameInput.addActionListener(this); 
-        NameInput.setFont(new Font("標楷體", 1, 40));
+        NameInput.setFont(new Font("璅扑擃�", 1, 40));
         NameInput.setForeground(Color.getHSBColor(25, 86, 55));
         NameInput.setBounds(370,70,350,40); 
         NameInput.setCaretColor(Color.yellow);
         NameInput.setOpaque(false);
         add(NameInput); 
    
-        //設置Start按鈕
+        //閮剔蔭Start����
         Start.setIcon(start_icon);
-        Start.setBounds(100,150, 170,53);//設置大小
-        Start.setContentAreaFilled(false); //設置透明背景
+        Start.setBounds(100,150, 170,53);//閮剔蔭憭批��
+        Start.setContentAreaFilled(false); //閮剔蔭���
         Start.addActionListener(new ActionListener(){ 
     		public void actionPerformed(ActionEvent e){ 
     			String playername = NameInput.getText();
     			System.out.print( playername + "\n" );
-    			Insert_playername(playername);//新增PlayerName到資料庫
-    			Start_game();//進入Play_page
+    			Insert_playername(playername);//�憓layerName�鞈�澈
+    			Start_game();//�脣Play_page
     			} 
-    		}); //監聽
+    		}); //��
         
-        //設置Exit按鈕
+        //閮剔蔭Exit����
         Exit.setIcon(exit_icon);
         Exit.setBounds(300,150, 170,53);
         Exit.setContentAreaFilled(false);
         Exit.addActionListener(new ActionListener(){ 
 		public void actionPerformed(ActionEvent e){ 
-			windowClosing(null);//關掉視窗
+			windowClosing(null);//������
 			
 			} 
-		}); //監聽
+		}); //��
         
-        //設置Score按鈕
+        //閮剔蔭Score����
         Score.setIcon(score_icon);
         Score.setBounds(500,150, 170,53);
         Score.setContentAreaFilled(false);
         Score.addActionListener(new ActionListener(){ 
     		public void actionPerformed(ActionEvent e){ 
-    			Score_list();//進入Score_page
+    			Score_list();//�脣Score_page
     			} 
-    		}); //監聽
+    		}); //��
         
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent arg0) {
@@ -126,7 +126,7 @@ public class Start extends JFrame implements ActionListener{
         this.setVisible(true);
      }
     
-     //Exit對話窗
+     //Exit撠店蝒�
      public void windowClosing(WindowEvent e){
          int result=JOptionPane.showConfirmDialog(this, "是否確定要離開?", "確定??", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
              
@@ -134,7 +134,7 @@ public class Start extends JFrame implements ActionListener{
              this.dispose();
              System.exit(0);  
          }else{
-             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??��?��?��??
+             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??嚙踝蕭?嚙踝蕭?嚙踝蕭??
          }            
      }
      

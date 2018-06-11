@@ -1,24 +1,29 @@
 package Game_page;
-
 import java.util.ArrayList;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+
+
 import java.awt.event.*;
 import java.util.Timer;
 import java.io.IOException;
 import java.awt.image.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.*;
 
 
 
 public class Table extends JFrame implements MouseListener, MouseMotionListener
 {
-	
 	private static final long serialVersionUID = 1L;
-	
-	
+
+
 	public static void main(String [] args){
 		Table t = new Table();
 		t.setSize(950,600);
@@ -27,7 +32,6 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         Task myTask = new Task(t);
         myTimer.schedule(myTask,30,5);
 		t.setVisible(true);
-
 	}
 
     private ArrayList<Billiard> myBilliards;
@@ -46,7 +50,7 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
     private AffineTransform myStickOffset;
     private double powerOffset, power, angle;
     private boolean stopped;
-    
+
     public int frequency = 0;
 
     public void init()
@@ -65,7 +69,7 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         myPockets.add( new pocket(471,474));
         myPockets.add( new pocket(841,467));
 
-        myCueBall = new qBall(225,290);
+        myCueBall = new qBall(225,290,"",Color.WHITE);
         myCueStick = new CueStick();
 
         dim = new Dimension(1000,700);
@@ -91,33 +95,32 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         myStickOffset = new AffineTransform();
         myStickOffset.setToTranslation(-6,0);
 
-        myBilliards.add(new Billiard(585,290));
         
-        /*myBilliards.add(new Billiard(604,279));
-        myBilliards.add(new Billiard(604,301));
+        myBilliards.add(new Billiard(585,290,"9",Color.yellow));
         
-        myBilliards.add(new Billiard(623,269));
-        myBilliards.add(new Billiard(623,290));
-        myBilliards.add(new Billiard(623,311));
+        myBilliards.add(new Billiard(604,279,"7",Color.gray));
+        myBilliards.add(new Billiard(604,301,"12",Color.MAGENTA));
         
-        myBilliards.add(new Billiard(642,258));
-        myBilliards.add(new Billiard(642,279));
-        myBilliards.add(new Billiard(642,301));
-        myBilliards.add(new Billiard(642,322));
+        myBilliards.add(new Billiard(623,269,"1",Color.YELLOW));
+        myBilliards.add(new Billiard(623,290,"8",Color.black));
+        myBilliards.add(new Billiard(623,311,"15",Color.GRAY));
         
-        myBilliards.add(new Billiard(661,248));
-        myBilliards.add(new Billiard(661,269));
-        myBilliards.add(new Billiard(661,290));
-        myBilliards.add(new Billiard(661,311));
-        myBilliards.add(new Billiard(661,332));*/
+        myBilliards.add(new Billiard(642,258,"14",Color.GREEN));
+        myBilliards.add(new Billiard(642,279,"3",Color.red));
+        myBilliards.add(new Billiard(642,301,"10",Color.BLUE));
+        myBilliards.add(new Billiard(642,322,"6",Color.green));
+        
+        myBilliards.add(new Billiard(661,248,"5",Color.orange));
+        myBilliards.add(new Billiard(661,269,"4",Color.MAGENTA));
+        myBilliards.add(new Billiard(661,290,"13",Color.ORANGE));
+        myBilliards.add(new Billiard(661,311,"2",Color.blue));
+        myBilliards.add(new Billiard(661,332,"11",Color.RED));
         Billiard.parent = this;
 
-
     }
-    
+
     public void update()
     {
-    	
     	if(myBilliards == null) return;
         stopped = true;
         for(int i=0 ; i<myBilliards.size() ; i++){
@@ -138,15 +141,17 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
                     	Finish_game();
                     }//全部球都已進洞
 
+                   
                 }
             }
         }
         for(Billiard b : myBilliards){
             b.update();
+            
         }
         for(pocket p : myPockets){
             if(p.collidesWith(myCueBall)){
-                myCueBall = new qBall(250,275);
+                myCueBall = new qBall(250,275,"",Color.WHITE);
             }
         }
         if(myCueBall.getSpeed() > 0.001) stopped = false;
@@ -199,8 +204,6 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         }
 
         g.drawImage(offscreen,0,0,this);
-        
-        
     }
 
     public void mouseClicked(MouseEvent e){}
@@ -211,7 +214,6 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         double dx = e.getX() - myCueBall.getX();
         double dy = e.getY() - myCueBall.getY();
         powerOffset = Math.sqrt(dx*dx+dy*dy);
-
         ++frequency;
     }
 
@@ -224,7 +226,7 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         double dy = y1-y2;
         return Math.sqrt(dx*dx-dy*dy);
     }
-    
+
     public void mouseReleased(MouseEvent e){
         if(stopped){
             myCueBall.Vx = power* Math.cos(angle - Math.PI/2)*0.1;
@@ -232,6 +234,8 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         }
         angle = 0;
         myTransform.setToTranslation(0,0);
+        
+        //SoundEffect.HIT.play();
         
     }
 
@@ -249,13 +253,12 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
     public void keyPressed(KeyEvent e){}
     public void keyReleased(KeyEvent e){}
     public void keyTyped(KeyEvent e){}
-
+    
     public void Finish_game(){
-    	 Connectmysql.UpdatePlayer_score.main(frequency);
-      	 this.setVisible(false);  
-      	 Score_page.End_score.main(null);
-       }
-
+   	 Connectmysql.UpdatePlayer_score.main(frequency);
+     	 this.setVisible(false);  
+     	 Score_page.End_score.main(null);
+      }
 
 
 

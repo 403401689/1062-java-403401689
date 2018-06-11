@@ -37,7 +37,7 @@ public class End_score extends JFrame implements ActionListener{
         this.setTitle("");
         this.setLayout(null);
         
-        //Start,Exit,Score按鈕新增
+        //Start,Exit,Score���憓�
         JButton Restart = new JButton();
         this.add(Restart);
         JButton Exit = new JButton();
@@ -45,13 +45,13 @@ public class End_score extends JFrame implements ActionListener{
         JButton Score = new JButton();
         this.add(Score);
         
-        //Start,Exit,Score按鈕圖案
+        //Start,Exit,Score������
         ImageIcon restart_icon = new ImageIcon(Start.class.getClassLoader().getResource("restart_icon.png"));
         ImageIcon exit_icon = new ImageIcon(Start.class.getClassLoader().getResource("exit_icon.png"));
         ImageIcon score_icon = new ImageIcon(Start.class.getClassLoader().getResource("score_icon.png"));
         ImageIcon score_img = new ImageIcon(Start.class.getClassLoader().getResource("score_img.png"));
         
-        //背景
+        //��
         ImageIcon background = new ImageIcon(Start.class.getClassLoader().getResource("Start_background_3.png"));
         JLabel bkLabel = new JLabel(background);
         bkLabel.setBounds(0, 0,background.getIconWidth(), background.getIconHeight());
@@ -70,40 +70,40 @@ public class End_score extends JFrame implements ActionListener{
         
         //SCORE JLABEL
         JLabel label1=new JLabel(score);
-        label1.setFont(new Font("標楷體?", 1, 220));
+        label1.setFont(new Font("璅扑擃�?", 1, 220));
         label1.setForeground(Color.getHSBColor(178, 34, 34));
         label1.setBounds(800,0,350,250);
         this.add(label1);
         
-        //設置Restart按鈕
+        //閮剔蔭Restart����
         Restart.setIcon(restart_icon);
         Restart.setBounds(100,95, 200,53);
         Restart.setContentAreaFilled(false);
         Restart.addActionListener(new ActionListener(){ 
     		public void actionPerformed(ActionEvent e){ 
-    			Restart();//進入Score_page
+    			Restart();//�脣Score_page
     			} 
-    		}); //監聽
+    		}); //��
              
-        //設置Exit按鈕
+        //閮剔蔭Exit����
         Exit.setIcon(exit_icon);
         Exit.setBounds(330,95, 170,53);
         Exit.setContentAreaFilled(false);
         Exit.addActionListener(new ActionListener(){ 
 		public void actionPerformed(ActionEvent e){ 
-			windowClosing(null);//關掉視窗
+			windowClosing(null);//������
 			} 
-		}); //監聽
+		}); //��
         
-        //設置Score按鈕
+        //閮剔蔭Score����
         Score.setIcon(score_icon);
         Score.setBounds(530,95, 170,53);
         Score.setContentAreaFilled(false);
         Score.addActionListener(new ActionListener(){ 
     		public void actionPerformed(ActionEvent e){ 
-    			Score_list();//進入Score_page
+    			Score_list();//�脣Score_page
     			} 
-    		}); //監聽
+    		}); //��
                
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent arg0) {
@@ -115,7 +115,7 @@ public class End_score extends JFrame implements ActionListener{
     
     
      
-     //Exit對話窗
+     //Exit撠店蝒�
      public void windowClosing(WindowEvent e){
          int result=JOptionPane.showConfirmDialog(this, "是否確定要離開?", "確定??", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
              
@@ -123,7 +123,7 @@ public class End_score extends JFrame implements ActionListener{
              this.dispose();
              System.exit(0);  
          }else{
-             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??��?��?��??
+             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);//??嚙踝蕭?嚙踝蕭?嚙踝蕭??
          }            
      }
      

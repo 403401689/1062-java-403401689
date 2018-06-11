@@ -1,13 +1,12 @@
 package Game_page;
-
 import java.awt.Graphics;
 import java.awt.Color;
 
 public class qBall extends Billiard
 {
-    public qBall(double x, double y)
+    public qBall(double x, double y,String number,Color color)
     {
-        super(x,y);
+        super(x,y,number,Color.white);
     }
 
     public void paint(Graphics g)
