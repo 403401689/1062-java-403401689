@@ -1,0 +1,22 @@
+  System.out.println("歷史排行資料區");
+	    System.out.println("顯示15名");
+	    String2[] scorerecord = new String2 [20];
+	    scorerecord[0]="第1名";
+	    scorerecord[1]="第2名";
+	    scorerecord[2]="第3名";
+	    scorerecord[3]="第4名";
+	    scorerecord[4]="第5名";
+	    scorerecord[5]="第6名";
+	    scorerecord[6]="第7名";
+	    scorerecord[7]="第8名";
+	    scorerecord[8]="第9名";
+	    scorerecord[9]="第10名";
+	    scorerecord[10]="第11名";
+	    scorerecord[11]="第12名";
+	    scorerecord[12]="第13名";
+	    scorerecord[13]="第14名";
+	    scorerecord[14]="第15名";
+	    for(int i=0;i<10;i++){
+		    System.out.println(scorerecord[i]);
+		    }
+	
