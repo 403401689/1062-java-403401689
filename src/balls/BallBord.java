@@ -45,8 +45,8 @@ public class BallBord extends JPanel implements ActionListener{
       canvasHeight = height;
       
       // Init the ball at a random location (inside the box) and moveAngle
-      motherball = new Ball(320, 400, 15, 10, 90, Color.WHITE); //x=320,y=400,radius=15,speed=0,angle=90,color=white
-      ball1 = new Ball(320, 200, 15, 0, 90, Color.RED);
+      motherball = new Ball(320, 400, 15, 5, 90, Color.WHITE); //x=320,y=400,radius=15,speed=0,angle=90,color=white
+      ball1 = new Ball(320, 200, 15, 0, 60, Color.RED);
       
       gametable = new Box(0, 0, canvasWidth, canvasHeight, Color.BLACK);
      
@@ -79,6 +79,8 @@ public class BallBord extends JPanel implements ActionListener{
     
       // Start the ball bouncing
       gameStart();
+      
+
    }
    
    /** Start the ball bouncing. */
@@ -94,6 +96,7 @@ public class BallBord extends JPanel implements ActionListener{
                // Refresh the display
                repaint();
                // Delay and give other thread a chance
+               
                try {
                   Thread.sleep(1000 / UPDATE_RATE);
                } catch (InterruptedException ex) {}
@@ -143,6 +146,8 @@ public void actionPerformed(ActionEvent e) {
 		gameThread.suspend();
 	}else if(e.getSource()==resume){
 		gameThread.resume();
+		//motherball.setspeed(30);
+
 	}
 	
 }

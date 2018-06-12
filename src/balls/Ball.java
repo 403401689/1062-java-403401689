@@ -2,14 +2,14 @@ package balls;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Formatter;
+
 
 public class Ball {
 	float x , y , radius;
 	float lastx , lasty;
 	float speedx , speedy;
+	float angle , speed;
 	private Color color;
-	float vx, vy;
 	
 
 	public Ball(float x, float y, float radius, float speed, float angleInDegree, Color color) {
@@ -20,6 +20,8 @@ public class Ball {
 		this.speedy = (float)(-speed * (float)Math.sin(Math.toRadians(angleInDegree)));
 		this.radius = radius;
 		this.color = color;
+		this.speed = speed;
+		this.angle = angleInDegree;
 		}
 	
 	public void ballmovewithcollisiondetection(Box table ,Ball ball) {
@@ -39,6 +41,7 @@ public class Ball {
 	      lasty = y;
 	      x += speedx;
 	      y += speedy;
+	      
 	      // Check if the ball moves over the bounds. If so, adjust the position and speed.
 	      if (x < ballMinX) {
 	         speedx = -speedx; // Reflect along normal
@@ -57,17 +60,28 @@ public class Ball {
 	      }
 	      
 	      //detection collision with other balls
-	      if (distance < 2*radius) {
-	    	  speedx = -speedx;
+	      if (distance <= 2*radius) {
+	    	  
+	    	  
+	    	  angle += 45;
+	    	  ball.angle += 45;
+	    	  
+	    	  float temp = speed;
+	    	  speed = ball.speed;
+	    	  ball.speed = temp;
+	    	  
+	    	  	
+	    	  speedx = (float)(speed * Math.cos(Math.toRadians(angle)));
 	    	  x = lastx;
-	    	  speedy = -speedy;
+	    	  speedy = (float)(-speed * (float)Math.sin(Math.toRadians(angle)));
 	    	  y = lasty;
-	    	  ball.speedx = -ball.speedx;
+	    	  
+	    	  ball.speedx = (float)(ball.speed * Math.cos(Math.toRadians(ball.angle)));
 	    	  ball.x = ball.lastx;
-	    	  ball.speedy = -ball.speedy;
+	    	  ball.speedy = (float)(-ball.speed * (float)Math.sin(Math.toRadians(ball.angle)));
 	    	  ball.y = ball.lasty;
 	    	
-	    		  
+	    	
 	    	  
 	      }
 	   }
@@ -87,6 +101,7 @@ public class Ball {
 		return radius;
 	}
 
+	
 	public void draw(Graphics g) {
 		g.setColor(color);
 		g.fillOval((int)(x - radius), (int)(y - radius), (int)(2 * radius), (int)(2 * radius));
