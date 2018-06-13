@@ -31,10 +31,6 @@ public class Ball {
 	      float ballMaxX = table.maxX - radius;
 	      float ballMaxY = table.maxY - radius;
 	   
-	      //two ball distance
-	      float xdistance = x - ball.x;
-	      float ydistance = y - ball.y;
-	      float distance = (float) Math.sqrt (xdistance * xdistance + ydistance * ydistance );
 	      
 	      // Calculate the ball's new position
 	      lastx = x;
@@ -59,18 +55,50 @@ public class Ball {
 	         y = ballMaxY;
 	      }
 	      
+	      
+	      //two ball distance
+	      float xdistance = x - ball.x;
+	      float ydistance = y - ball.y;
+	      float distance = (float) Math.sqrt (xdistance * xdistance + ydistance * ydistance );
+	      
+	      
 	      //detection collision with other balls
 	      if (distance <= 2*radius) {
 	    	  
-	    	  
-	    	  angle += 45;
-	    	  ball.angle += 45;
 	    	  
 	    	  float temp = speed;
 	    	  speed = ball.speed;
 	    	  ball.speed = temp;
 	    	  
-	    	  	
+	    	  boolean samedegree = 0 < angle && angle <=90 && 0 < ball.angle && ball.angle <= 90
+	    			  ||	90 < angle && angle <=180 && 90 < ball.angle && ball.angle <= 180
+	    			  ||	180 < angle && angle <=270 && 180 < ball.angle && ball.angle <= 270
+	    			  ||	270 < angle && angle <=360 && 270 < ball.angle && ball.angle <= 360; 
+	    	  
+	    	  if ( samedegree == true  ) {
+	    		  if(angle > ball.angle) {
+	    		  angle -= 45;
+	    		  ball.angle += 45;
+	    		  }else
+	    		  {
+	    			  angle +=45;
+	    			  ball.angle -=45;
+	    		  }
+	    	  } else if(Math.abs(angle - ball.angle) == 0 || Math.abs(angle - ball.angle) == 180){
+	    		  angle += 180;
+	    		  ball.angle += 180;
+	    	  }
+	    	  else {
+	    		  if (angle > ball.angle) {
+	    			  angle +=45;
+	    			  ball.angle -=45;
+	    		  }
+	    		  else {
+	    			  angle -= 45;
+	    			  ball.angle += 45;
+	    		  }
+	    	  }
+
 	    	  speedx = (float)(speed * Math.cos(Math.toRadians(angle)));
 	    	  x = lastx;
 	    	  speedy = (float)(-speed * (float)Math.sin(Math.toRadians(angle)));
