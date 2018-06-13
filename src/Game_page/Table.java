@@ -137,9 +137,9 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
                     myBilliards.remove(b);
                     i--;
                     if(myBilliards.size()==0) {
-                    	System.out.println("HHH");
                     	Finish_game();
-                    }//•˛≥°≤y≥£§w∂i¨}
+                    	audio.Sound.play(1);
+                    }//ÁµêÊùüÈÅäÊà≤ÂõûÂÇ≥score
 
                    
                 }
@@ -151,6 +151,7 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         }
         for(pocket p : myPockets){
             if(p.collidesWith(myCueBall)){
+            	audio.Sound.play(1);
                 myCueBall = new qBall(250,275,"",Color.WHITE);
             }
         }
@@ -185,7 +186,6 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         for(Billiard b : myBilliards) b.paint(g2d);
         myCueBall.paint(g2d);
         
-        //for(pocket p : myPockets)p.paint(g2d);
 
         temp2.concatenate(myTranslate);
         temp2.concatenate(myTransform);
@@ -234,8 +234,7 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
         }
         angle = 0;
         myTransform.setToTranslation(0,0);
-        
-        //SoundEffect.HIT.play();
+        audio.Sound.play(0);
         
     }
 
@@ -253,6 +252,8 @@ public class Table extends JFrame implements MouseListener, MouseMotionListener
     public void keyPressed(KeyEvent e){}
     public void keyReleased(KeyEvent e){}
     public void keyTyped(KeyEvent e){}
+    
+    
     
     public void Finish_game(){
    	 Connectmysql.UpdatePlayer_score.main(frequency);

@@ -14,6 +14,8 @@ import java.util.TimeZone;
 public class UpdatePlayer_NameTime {
 
 	public static void main(String playername) {
+		
+		String Splayer_id = null;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -24,21 +26,33 @@ public class UpdatePlayer_NameTime {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/player_list?"
-					+ "user=root&password=0000&serverTimezone=UTC&useSSL=false");
+					+ "user=root&password=conansmart&serverTimezone=UTC&useSSL=false");
 
 			Statement stmt = conn.createStatement();
 					
-			//¨ú±o¹CÀ¸¶}©l®É¶¡
+			//å–çš„ç¾åœ¨æ™‚é–“
 			SimpleDateFormat nowdate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 			nowdate.setTimeZone(TimeZone.getTimeZone("GMT+8"));
 			String sdate = nowdate.format(new java.util.Date());
 			System.out.println(sdate);
 			
-			//·s¼W Player_name,Start_time¨ì¸ê®Æ®w
+			//æ–°å¢Player_name,Start_timeåˆ°è³‡æ–™åº«ä¸­
 			PreparedStatement sql_starttime = conn.prepareStatement("INSERT INTO player SET player_name=?, start_time = ? ;");
 			sql_starttime.setString(1, playername);
 			sql_starttime.setString(2, sdate);
 			sql_starttime.executeUpdate();
+			
+			String sql = "select * from player order by player_id desc limit 1;";
+			ResultSet result = stmt.executeQuery(sql);
+			while (result.next()) {
+				 Splayer_id = result.getString(1);
+			}
+			int Iplayer_id = Integer.valueOf(Splayer_id);
+			
+			//æ–°å¢End_timeåˆ°è³‡æ–™åº«ä¸­
+			PreparedStatement sql_endid = conn.prepareStatement("INSERT INTO end_time SET player_id = ?;");
+			sql_endid.setInt(1,Iplayer_id );
+			sql_endid.executeUpdate();
 			
 		} catch (SQLException ex) {
 			// handle any errors

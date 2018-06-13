@@ -14,7 +14,7 @@ import java.util.TimeZone;
 public class UpdatePlayer_score {
 
 	public static void main(int frequency) {
-		String player_id = null;
+		String Splayer_id = null;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -25,24 +25,35 @@ public class UpdatePlayer_score {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/player_list?"
-					+ "user=root&password=0000&serverTimezone=UTC&useSSL=false");
+					+ "user=root&password=conansmart&serverTimezone=UTC&useSSL=false");
 
 			Statement stmt = conn.createStatement();
 			
-			//¨°±o∑Ì´eplayer_id
+			//ÂèñÁöÑÁèæÂú®ÊôÇÈñì
+			SimpleDateFormat nowdate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+			nowdate.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+			String sdate = nowdate.format(new java.util.Date());
+			System.out.println(sdate);
+			
 			String sql = "select * from player order by player_id desc limit 1;";
 			ResultSet result = stmt.executeQuery(sql);
 			while (result.next()) {
-				 player_id = result.getString(1);
+				 Splayer_id = result.getString(1);
 			}
-			int intValue = Integer.valueOf(player_id);
+			int Iplayer_id = Integer.valueOf(Splayer_id);
 
 							
-			//∏Ú∑s∏ÍÆ∆Æw™∫score
-			PreparedStatement sql_starttime = conn.prepareStatement("UPDATE player SET score = ? WHERE player_id = ?;");
-			sql_starttime.setInt(2, intValue);
-			sql_starttime.setInt(1, frequency);
-			sql_starttime.executeUpdate();
+			//Ë∑üÊñ∞score
+			PreparedStatement sql_score = conn.prepareStatement("UPDATE player SET score = ? WHERE player_id = ?;");
+			sql_score.setInt(2, Iplayer_id);
+			sql_score.setInt(1, frequency);
+			sql_score.executeUpdate();
+					
+			//Ë∑üÊñ∞endtime
+			PreparedStatement sql_endtime = conn.prepareStatement("UPDATE end_time SET end_time = ? WHERE player_id = ?;");
+			sql_endtime.setInt(2, Iplayer_id);
+			sql_endtime.setString(1, sdate);
+			sql_endtime.executeUpdate();
 			
 		} catch (SQLException ex) {
 			// handle any errors

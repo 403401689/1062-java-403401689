@@ -51,7 +51,7 @@ public class BestScore_list {
     		con = DriverManager.getConnection("jdbc:mysql://localhost/player_list?"
 					+ "user=root&password=conansmart&serverTimezone=UTC&useSSL=false");
     		st = con.createStatement();
-    		s = "select * from player ORDER BY score ASC";//敺��憭�
+    		s = "select * from player ORDER BY score ASC";//按造 score 由小排到大
     		rs = st.executeQuery(s);
     		java.sql.ResultSetMetaData rsmt = rs.getMetaData();
     		int c = rsmt.getColumnCount()+1;
@@ -69,7 +69,7 @@ public class BestScore_list {
     			data.add(row);
     		}
     		
-    		//閮剔蔭��
+    		//背景
     		ImageIcon background = new ImageIcon(Start.class.getClassLoader().getResource("Start_background_2.png"));
             JLabel bkLabel = new JLabel(background);
             bkLabel.setBounds(0, 0,background.getIconWidth(), background.getIconHeight());
@@ -78,46 +78,46 @@ public class BestScore_list {
             JPanel panel = (JPanel)frame.getContentPane();
             panel.setOpaque(false);
             
-            //Back,Exit���憓�
+            //Back,Exit按鈕新增
             JButton Back = new JButton();
             frame.add(Back);
             JButton Exit = new JButton();
             frame.add(Exit);
             
-            //Start,Exit,Score������
+            //Start,Exit,Score按鈕圖案
             ImageIcon back_icon = new ImageIcon(Start.class.getClassLoader().getResource("back_icon.png"));
             ImageIcon exit_icon = new ImageIcon(Start.class.getClassLoader().getResource("exit_icon.png"));
             ImageIcon highscore_icon = new ImageIcon(Start.class.getClassLoader().getResource("high_score.png"));
             
-            //閮剔蔭Back����
+            //Back按鈕設定與監聽
             Back.setIcon(back_icon);
             Back.setBounds(900,10, 170,53);
             Back.setContentAreaFilled(false);
             Back.addActionListener(new ActionListener(){ 
         		public void actionPerformed(ActionEvent e){ 
         			
-        			Back_start();//�脣Start_page
+        			Back_start();//跳到Start_page
         			} 
-        		}); //��
+        		}); 
             
-            //閮剔蔭Exit����
+            //Exit按鈕設定與監聽
             Exit.setIcon(exit_icon);
             Exit.setBounds(1100,10, 170,53);
             Exit.setContentAreaFilled(false);
             Exit.addActionListener(new ActionListener(){ 
         		public void actionPerformed(ActionEvent e){ 
-        			windowClosing(null);//������
+        			windowClosing(null);//跳出離開視窗
         			} 
-        		}); //��
+        		}); 
                  
             //SCORE JLABEL
             JLabel label1=new JLabel(highscore_icon);
-            label1.setFont(new Font("璅扑擃�?", 1, 50));
+            label1.setFont(new Font("標楷體", 1, 50));
             label1.setForeground(Color.getHSBColor(178, 34, 34));
             label1.setBounds(250,0,500,80);
             frame.add(label1);
             
-            //鞈��淤TABLE
+            //TABLE新增
     		frame.setLocationRelativeTo(null);
     		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     		JTable table = new JTable(data,column) { // 閮剔蔭jtable����銝粹����
@@ -140,18 +140,18 @@ public class BestScore_list {
     		frame.setContentPane(panel);
     		frame.setVisible(true);
     		
-    		//table 閮剖��
-    		table.setRowHeight(30);// 閮剔蔭��憭批��
-    		table.setFont(new Font("璅扑雿�", Font.PLAIN, 18));
+    		//table 設定
+    		table.setRowHeight(30);// 行距
+    		table.setFont(new Font("標楷體", Font.PLAIN, 18));
     		table.setForeground(Color.BLACK);
     		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();//閮剔蔭table��捆撅葉
     		tcr.setHorizontalAlignment(SwingConstants.CENTER);
     		table.setDefaultRenderer(Object.class, tcr);
     		
-    		//table header 憭批��
-    		JTableHeader head = table.getTableHeader(); // �撱箄”�����情
-            head.setPreferredSize(new Dimension(head.getWidth(), 35));// 閮剔蔭銵券憭批��
-            head.setFont(new Font("璅扑雿�", Font.PLAIN, 18));
+    		//table header 設定
+    		JTableHeader head = table.getTableHeader(); 
+            head.setPreferredSize(new Dimension(head.getWidth(), 35));
+            head.setFont(new Font("標楷體", Font.PLAIN, 18));
             head.setForeground(Color.BLUE);
             head.setOpaque(false);
             
@@ -176,7 +176,7 @@ public class BestScore_list {
    	Start_page.Start.main(null);
     }         
     
-    //Exit撠店蝒�
+    //Exit視窗
     public static void windowClosing(WindowEvent e){
         int result=JOptionPane.showConfirmDialog(frame, "是否確定要離開?", "確定??", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             

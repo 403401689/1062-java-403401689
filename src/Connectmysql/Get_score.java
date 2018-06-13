@@ -29,11 +29,11 @@ public class Get_score {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/player_list?"
-					+ "user=root&password=0000&serverTimezone=UTC&useSSL=false");
+					+ "user=root&password=conansmart&serverTimezone=UTC&useSSL=false");
 
 			Statement stmt = conn.createStatement();
 			
-			//Select ¸ê®Æ®w³Ì«á¤@­Óªº¤À¼Æ
+			//Select æœ€å¾Œä¸€åˆ—ç—…æ ¹æ–°score
 			String sql = "select * from player order by player_id desc limit 1;";
 			ResultSet result = stmt.executeQuery(sql);
 			while (result.next()) {
