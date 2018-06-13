@@ -22,22 +22,19 @@ public class Ball {
 		}
 	
 	public void ballmovewithcollisiondetection(ContainerBox table ,Ball ball) {
-	      // Get the ball's bounds, offset by the radius of the ball
+		// Get the ball's bounds, offset by the radius of the ball
 	      float ballMinX = table.minX + radius;
 	      float ballMinY = table.minY + radius;
 	      float ballMaxX = table.maxX - radius;
 	      float ballMaxY = table.maxY - radius;
 	   
-	      //two ball distance
-	      float xdistance = x - ball.x;
-	      float ydistance = y - ball.y;
-	      float distance = (float) Math.sqrt (xdistance * xdistance + ydistance * ydistance );
 	      
 	      // Calculate the ball's new position
 	      lastx = x;
 	      lasty = y;
 	      x += speedx;
 	      y += speedy;
+	      
 	      // Check if the ball moves over the bounds. If so, adjust the position and speed.
 	      if (x < ballMinX) {
 	         speedx = -speedx; // Reflect along normal
@@ -55,18 +52,61 @@ public class Ball {
 	         y = ballMaxY;
 	      }
 	      
+	      
+	      //two ball distance
+	      float xdistance = x - ball.x;
+	      float ydistance = y - ball.y;
+	      float distance = (float) Math.sqrt (xdistance * xdistance + ydistance * ydistance );
+	      
+	      
 	      //detection collision with other balls
-	      if (distance < 2*radius) {
-	    	  speedx = -speedx;
+	      if (distance <= 2*radius) {
+	    	  
+	    	  
+	    	  float temp = speed;
+	    	  speed = ball.speed;
+	    	  ball.speed = temp;
+	    	  
+	    	  boolean samedegree = 0 < angle && angle <=90 && 0 < ball.angle && ball.angle <= 90
+	    			  ||	90 < angle && angle <=180 && 90 < ball.angle && ball.angle <= 180
+	    			  ||	180 < angle && angle <=270 && 180 < ball.angle && ball.angle <= 270
+	    			  ||	270 < angle && angle <=360 && 270 < ball.angle && ball.angle <= 360; 
+	    	  
+	    	  if ( samedegree == true  ) {
+	    		  if(angle > ball.angle) {
+	    		  angle -= 45;
+	    		  ball.angle += 45;
+	    		  }else
+	    		  {
+	    			  angle +=45;
+	    			  ball.angle -=45;
+	    		  }
+	    	  } else if(Math.abs(angle - ball.angle) == 0 || Math.abs(angle - ball.angle) == 180){
+	    		  angle += 180;
+	    		  ball.angle += 180;
+	    	  }
+	    	  else {
+	    		  if (angle > ball.angle) {
+	    			  angle +=45;
+	    			  ball.angle -=45;
+	    		  }
+	    		  else {
+	    			  angle -= 45;
+	    			  ball.angle += 45;
+	    		  }
+	    	  }
+
+	    	  speedx = (float)(speed * Math.cos(Math.toRadians(angle)));
 	    	  x = lastx;
-	    	  speedy = -speedy;
+	    	  speedy = (float)(-speed * (float)Math.sin(Math.toRadians(angle)));
 	    	  y = lasty;
-	    	  ball.speedx = -ball.speedx;
+	    	  
+	    	  ball.speedx = (float)(ball.speed * Math.cos(Math.toRadians(ball.angle)));
 	    	  ball.x = ball.lastx;
-	    	  ball.speedy = -ball.speedy;
+	    	  ball.speedy = (float)(-ball.speed * (float)Math.sin(Math.toRadians(ball.angle)));
 	    	  ball.y = ball.lasty;
 	    	
-	    		  
+	    	
 	    	  
 	      }
 	   }
