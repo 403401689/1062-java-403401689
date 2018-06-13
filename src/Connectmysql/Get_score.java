@@ -28,8 +28,8 @@ public class Get_score {
 
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/player_list?"
-					+ "user=root&password=conansmart&serverTimezone=UTC&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/g14?"
+					+ "user=root&password=0000&serverTimezone=UTC&useSSL=false");
 
 			Statement stmt = conn.createStatement();
 			
