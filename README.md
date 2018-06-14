@@ -75,3 +75,22 @@
     +  遊戲暫停與繼續
     
 + 第三次上機考尚未開始製作
+
+----------------------------------------------------------------
+
+## 期末project報告
+
++ 程式執行：
+    + 將src、libs、resources匯入
+    + 將g14.sql匯入資料庫，資料庫名稱為g14，密碼為0000
+    + 執行src中Start_page裡的Start.java便可執行
+
++ jar檔：
+    + jar檔的音效會沒有出現，但從Start.java執行的會有
+
++ Project 編寫：
+    + Game_page不是自行編寫
+    + Game_page裡的球繪圖為重新編寫過
+    + 資料夾ball_test的Part1為球桿拉撞擊球編寫
+    + 資料夾ball_test的Part2為球碰撞編寫
+
